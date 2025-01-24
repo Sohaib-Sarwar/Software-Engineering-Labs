@@ -1,82 +1,313 @@
-# GitHub Filler
-> Want to look like a productive developer? I got you.
+# Software Engineering Labs
 
-![GitHub release (latest by date)](https://img.shields.io/badge/release-v1.0.0-green)
-![language (python)](https://img.shields.io/badge/language-python-blue)
-![language (Bash)](https://img.shields.io/badge/language-Bash-green)
-![license](https://img.shields.io/badge/license-GPL--3.0-yellow)
+> A comprehensive collection of laboratory work, practical implementations, experiments, and coursework for the Software Engineering program.
 
-### What is GitHub-Filler?
+---
 
-GitHub Filler is a CLI tool based on the [Commitify](https://github.com/liamarguedas/Commitify) designed to generate fake commits over a specified date range, improving your GitHub contribution graph. It creates the appearance of consistent activity, helping to simulate a more productive developer profile.
+## About
 
-### Before
-![After](https://raw.githubusercontent.com/liamarguedas/GitHub-Filler/master/img/before.png)
+This repository contains practical work completed throughout the Software Engineering program. It serves as a centralized collection of programming exercises, software implementations, system configurations, experiments, and technical coursework.
 
-### After
-![Before](https://raw.githubusercontent.com/liamarguedas/GitHub-Filler/master/img/after.png)
-___
+The repository covers multiple areas of software engineering and computer science, including software construction, web engineering, cloud computing, computer networks, databases, software design, and other core technical subjects.
 
-## Get Stared
+---
 
-### 1. Pre-requisites:
+## Course Areas
 
-Before you begin, you'll need to install the prerequisites:
-- [Python 3.x](https://www.python.org/downloads/)
-- Git installed and connected to your GitHub account.
-- Create a new repository on GitHub. You can name it as you wish, but ensure it remains empty. Do not add any files, including `LICENSE` or `README.md`. Optional: Set it to private.
-### 2. Clone GitHub-Filler:
+### Software Construction
 
-- Clone the repository with the following commands:
-     ```bash
-     git clone https://github.com/liamarguedas/GitHub-Filler.git
-     cd GitHub-Filler
-     ```
-### 3. Execute the tool
-- Run the following command:
-  ```bash
-  python main.py
-  ```
-  
-### 4. **Configuration**:
-   - Upon running `main.py`, the CLI will prompt you for repository information and GitHub-Filler configuration.
-   - You can set your own configuration or leave it blank to use the default settings.
-     - **Repository URL**: Provide the URL of the GitHub repository you created earlier.
-     - **Branch**: Specify the branch of the repository. If left blank, "master" will be used.
-     - **Commits**: Enter the number of commits GitHub Filler will execute daily. Leaving this blank will result in a random number of commits each day.
-     - **File**: Choose the file type to be added to the repository. Specify only the extension (e.g., `py`, `js`, `rs`) without the dot. If left blank, Python files (`py`) will be used by default.
-     - **Starting date**: Specify a start date from which the tool will begin filling your contributions graph.
-     - **Ending date**: Specify a end date from which the tool will stop filling your contributions graph.
-       
-     *Note: Date format should be **year, month, day** without leading zeros, example: 04/23/2024 should be provided as -> 2024, 4, 23*
-     
-     *Note: Providing the repository URL is mandatory.*
+Practical work focused on building reliable, maintainable, and scalable software systems.
 
-5. **Ready to Use**:
-   - Once the configuration is complete, the tool will start populating your contribution graph.
-   
-**IMPORTANT**: Filling one entire year can take up to an hour, so if you've configured it to fill five years, it may take about five hours. Keep this in mind, as the     tool will be making time and calendar changes to your computer and you likely won't be able to use it while it's running.
+**Key areas include:**
 
-With these steps completed, GitHub-Filler is set up and ready to demonstrate consistent activity on your GitHub Account.
+- Object-Oriented Programming
+- Software Architecture
+- Design Patterns
+- Clean Code Practices
+- Version Control
+- Code Organization and Modularity
+- Software Testing
+- Debugging and Error Handling
+- Build and Development Tools
+- Software Maintenance
+- Collaborative Software Development
 
-## Platform Compatibility
+---
 
-- **Windows**: Fully supported and ready to use.
-- **Linux / macOS**: Fully supported and ready to use.
+### Web Engineering
 
-## Donations
+Laboratory work covering the development of modern web-based applications and services.
 
-GitHub Filler is a freely available, open-source CLI Tool crafted during my limited free time. If you find value in the project and wish to contribute to its ongoing development, kindly consider making a small donation. Your support is genuinely appreciated!
+**Key areas include:**
 
-[Donate with PayPal](https://www.paypal.me/ILIAMFTW)
+- HTML, CSS, and JavaScript
+- Frontend Development
+- Backend Development
+- Client-Server Architecture
+- RESTful APIs
+- Web Application Architecture
+- Authentication and Authorization
+- Database Integration
+- Form Handling and Validation
+- Session Management
+- Responsive Web Development
+- Web Security
+- Deployment and Hosting
 
-## Contributors
+---
 
-<a href="https://github.com/liamarguedas/GitHub-Filler/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=liamarguedas/GitHub-Filler" />
-</a>
+### Cloud Computing
 
-## License
+Practical implementations and experiments involving cloud infrastructure, services, deployment, and distributed systems.
 
-GitHub-Filler was created by [Liam Arguedas](https://github.com/liamarguedas)
-and is licensed under the [GPL-3.0 license](/LICENSE).
+**Key areas include:**
+
+- Cloud Computing Fundamentals
+- Infrastructure as a Service
+- Platform as a Service
+- Software as a Service
+- Virtual Machines
+- Cloud Storage
+- Cloud Databases
+- Networking in Cloud Environments
+- Application Deployment
+- Scalability and Availability
+- Cloud Security
+- Distributed Systems
+- Cloud Service Management
+
+---
+
+### Computer Networks
+
+Practical networking exercises covering communication between systems and the underlying technologies that enable modern networks.
+
+**Key areas include:**
+
+- Network Architecture
+- OSI and TCP/IP Models
+- IP Addressing
+- Subnetting
+- Routing
+- Switching
+- Ethernet
+- TCP and UDP
+- DNS
+- DHCP
+- HTTP and HTTPS
+- Network Configuration
+- Client-Server Communication
+- Network Troubleshooting
+- Network Security
+
+---
+
+### Database Systems
+
+Practical work involving the design, implementation, querying, and management of databases.
+
+**Key areas include:**
+
+- Relational Database Concepts
+- Database Design
+- Entity-Relationship Modeling
+- SQL
+- CRUD Operations
+- Joins
+- Aggregation and Grouping
+- Constraints
+- Normalization
+- Transactions
+- Indexing
+- Database Security
+- Application-Database Integration
+
+---
+
+### Software Design and Architecture
+
+Work focused on designing software systems before and during implementation.
+
+**Key areas include:**
+
+- Software Architecture
+- Architectural Patterns
+- Design Patterns
+- UML
+- Class Diagrams
+- Sequence Diagrams
+- Use Case Modeling
+- Component Design
+- System Decomposition
+- Modularity
+- Coupling and Cohesion
+- SOLID Principles
+- Maintainability and Scalability
+
+---
+
+### Software Testing and Quality Assurance
+
+Practical exercises related to validating software correctness, reliability, and quality.
+
+**Key areas include:**
+
+- Unit Testing
+- Integration Testing
+- System Testing
+- Functional Testing
+- Regression Testing
+- Test Case Design
+- Boundary Value Analysis
+- Equivalence Partitioning
+- Debugging
+- Code Quality
+- Test Automation
+- Software Quality Assurance
+
+---
+
+### Data Structures and Algorithms
+
+Implementation and analysis of fundamental computational techniques and data structures.
+
+**Key areas include:**
+
+- Arrays
+- Linked Lists
+- Stacks
+- Queues
+- Trees
+- Graphs
+- Hash Tables
+- Sorting Algorithms
+- Searching Algorithms
+- Recursion
+- Graph Traversal
+- Algorithm Complexity
+- Time and Space Complexity
+
+---
+
+### Operating Systems
+
+Practical concepts related to the management of computer hardware and system resources.
+
+**Key areas include:**
+
+- Processes
+- Threads
+- Process Scheduling
+- Synchronization
+- Deadlocks
+- Memory Management
+- Virtual Memory
+- File Systems
+- System Calls
+- Concurrency
+- Resource Management
+
+---
+
+### Object-Oriented Programming
+
+Implementation of software systems using object-oriented programming principles.
+
+**Key areas include:**
+
+- Classes and Objects
+- Encapsulation
+- Inheritance
+- Polymorphism
+- Abstraction
+- Interfaces
+- Exception Handling
+- Generic Programming
+- Collections
+- File Handling
+- Object-Oriented Design
+
+---
+
+### Artificial Intelligence and Machine Learning
+
+Practical implementations covering fundamental concepts in intelligent systems and machine learning.
+
+**Key areas include:**
+
+- Machine Learning Fundamentals
+- Data Preprocessing
+- Classification
+- Regression
+- Clustering
+- Model Training
+- Model Evaluation
+- Feature Engineering
+- Neural Networks
+- AI Algorithms
+
+---
+
+## Technologies & Tools
+
+The repository may contain implementations using a variety of programming languages, frameworks, databases, development environments, and infrastructure tools.
+
+### Programming Languages
+
+- C++
+- Java
+- Python
+- JavaScript
+- SQL
+- HTML
+- CSS
+
+### Frameworks & Technologies
+
+- Django
+- Flask
+- Node.js
+- Express.js
+- React
+- REST APIs
+- Git
+- Linux
+
+### Databases
+
+- MySQL
+- PostgreSQL
+- SQLite
+- MongoDB
+
+### Cloud & Infrastructure
+
+- Google Cloud Platform
+- Virtual Machines
+- Linux Servers
+- Cloud Storage
+- Networking Services
+- Deployment Tools
+
+---
+
+## Repository Organization
+
+Coursework is organized according to the relevant subject or technical area.
+
+```text
+Software-Engineering-Labs/
+│
+├── Software-Construction/
+├── Web-Engineering/
+├── Cloud-Computing/
+├── Computer-Networks/
+├── Database-Systems/
+├── Software-Design/
+├── Software-Testing/
+├── Data-Structures-and-Algorithms/
+├── Operating-Systems/
+├── Object-Oriented-Programming/
+├── Artificial-Intelligence/
+│
+└── README.md
