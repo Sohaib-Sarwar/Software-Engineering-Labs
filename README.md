@@ -1,4 +1,3 @@
-# Software Engineering Labs
 
 <p align="center">
   <img
