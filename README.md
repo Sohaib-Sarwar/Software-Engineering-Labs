@@ -2,8 +2,6 @@
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=Software%20Engineering%20Labs&fontSize=46&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=NUST%20%7C%20SEECS%20%E2%80%94%20Practical%20Coursework%20%26%20Lab%20Work&descAlignY=58&descSize=18" width="100%" alt="Software Engineering Labs banner" />
-
 <img
   src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&pause=1000&color=2F81F7&center=true&vCenter=true&width=750&lines=Building+Systems+Through+Practical+Engineering;OOP+%7C+Web+%7C+Cloud+%7C+Networks+%7C+Databases+%7C+AI;One+Branch+Per+Subject+%E2%80%94+Explore+Below+%F0%9F%91%87"
   alt="Animated introduction"
