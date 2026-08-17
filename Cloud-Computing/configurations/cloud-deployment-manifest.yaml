@@ -1,0 +1,177 @@
+# cloud-deployment-manifest.yaml
+#
+# Annotated, Kubernetes-style example manifest for the Flask "hello-service"
+# built in ../deployments/Dockerfile. This is reference/lab material -- it
+# illustrates the concepts of scalability (replicas + horizontal scaling),
+# availability (readiness/liveness probes, rolling updates, multiple pods
+# spread out), and safe resource usage (requests/limits) as they are
+# expressed in a real Kubernetes Deployment + Service pair.
+#
+# Apply with (against any Kubernetes cluster, e.g. minikube/kind/a managed
+# cloud cluster):
+#   kubectl apply -f cloud-deployment-manifest.yaml
+# Inspect:
+#   kubectl get deployments,pods,svc -l app=hello-service
+# Remove:
+#   kubectl delete -f cloud-deployment-manifest.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-service
+  labels:
+    app: hello-service
+    tier: backend
+spec:
+  # --- Scalability ------------------------------------------------------------
+  # Number of identical pod copies to run. Because app.py keeps no local
+  # state, it can be scaled horizontally just by raising this number (or via
+  # a HorizontalPodAutoscaler, see the commented-out example below) instead
+  # of scaling a single server vertically.
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-service
+  # --- Availability: rolling update strategy -----------------------------------
+  # Ensures there is zero downtime during deploys: at most 1 extra pod is
+  # created above `replicas` while updating (maxSurge), and at most 1 pod is
+  # allowed to be unavailable at a time (maxUnavailable) -- so traffic keeps
+  # being served by the remaining healthy pods throughout a rollout.
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: hello-service
+        tier: backend
+    spec:
+      containers:
+        - name: hello-service
+          image: hello-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+              name: http
+          # --- Configuration & secrets ---------------------------------------
+          # Non-secret configuration passed as plain environment variables.
+          env:
+            - name: SERVICE_NAME
+              value: "hello-service"
+            - name: GREETING
+              value: "Hello from Kubernetes!"
+            - name: PORT
+              value: "5000"
+          # Secrets (real credentials) are never hardcoded in the manifest.
+          # Instead they are stored in a Kubernetes Secret object and
+          # referenced here -- this keeps credentials out of source control
+          # and out of `kubectl get pods -o yaml` output for anyone without
+          # RBAC access to Secrets. Example (uncomment once the referenced
+          # Secret exists in the cluster):
+          #
+          # - name: DB_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: hello-service-db-credentials
+          #       key: password   # holds a placeholder like YOUR_DB_PASSWORD
+          #                       # until swapped for a real secret at
+          #                       # deploy time via your secrets manager.
+          #
+          # To create that Secret from the command line (never commit the
+          # real value to a file):
+          #   kubectl create secret generic hello-service-db-credentials \
+          #     --from-literal=password=YOUR_DB_PASSWORD
+
+          # --- Availability: health checks -------------------------------------
+          # Liveness probe: if this fails repeatedly, Kubernetes kills and
+          # restarts the container -- recovers from a hung/deadlocked process.
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          # Readiness probe: if this fails, the pod is removed from the
+          # Service's load-balancing pool (but not restarted) until it passes
+          # again -- prevents sending traffic to a pod that isn't ready yet.
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          # --- Resource limits: fair scheduling & cost control -----------------
+          # `requests` is what the scheduler guarantees/reserves for the pod
+          # when deciding which node to place it on; `limits` is the hard
+          # ceiling the container is not allowed to exceed (throttled for
+          # CPU, OOM-killed if it exceeds memory). Setting both keeps one
+          # misbehaving pod from starving its neighbors on a shared cloud
+          # node, and keeps costs predictable.
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "128Mi"
+
+          # --- Security: least privilege at the pod/container level -----------
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+  labels:
+    app: hello-service
+spec:
+  # ClusterIP is the default, internal-only load balancer that spreads
+  # requests across every pod matching the selector below -- this is how
+  # the 3 replicas above are presented to callers as a single stable
+  # endpoint (by DNS name `hello-service`), regardless of how many pods
+  # exist or how often they are replaced during a rollout.
+  type: ClusterIP
+  selector:
+    app: hello-service
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+
+---
+# --- Optional: autoscaling example (illustrative, requires the Kubernetes
+# metrics-server add-on to be installed in the cluster to actually work).
+# Automatically raises/lowers `replicas` on the Deployment above based on
+# observed CPU load -- the cloud-native version of "scale out under load,
+# scale in to save cost when idle."
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hello-service-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hello-service
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

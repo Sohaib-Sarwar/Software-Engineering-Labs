@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes App - Web Engineering Lab</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="app-header">
+      <h1>Notes App</h1>
+      <p class="subtitle">A small client-server demo (Fetch API + Flask REST backend)</p>
+    </header>
+
+    <!-- Connection / API base URL -->
+    <section class="card">
+      <div class="field-row">
+        <label for="api-base">Backend URL</label>
+        <input type="text" id="api-base" value="http://127.0.0.1:5000" />
+      </div>
+      <p class="hint">
+        Make sure the Flask backend is running (see documentation/README.md), then reload notes below.
+      </p>
+    </section>
+
+    <!-- Login -->
+    <section class="card">
+      <h2>Login</h2>
+      <p class="hint">Demo credentials: <code>demo</code> / <code>password123</code></p>
+      <form id="login-form" class="field-row">
+        <input type="text" id="username" placeholder="Username" value="demo" autocomplete="username" />
+        <input type="password" id="password" placeholder="Password" value="password123" autocomplete="current-password" />
+        <button type="submit">Log in</button>
+      </form>
+      <p id="auth-status" class="status">Not logged in.</p>
+    </section>
+
+    <!-- Create note -->
+    <section class="card">
+      <h2>New note</h2>
+      <form id="note-form" class="field-column">
+        <input type="text" id="note-title" placeholder="Title" required />
+        <textarea id="note-content" placeholder="Content" rows="3" required></textarea>
+        <button type="submit">Add note</button>
+      </form>
+    </section>
+
+    <!-- Notes list -->
+    <section class="card">
+      <div class="card-header-row">
+        <h2>Notes</h2>
+        <button id="refresh-btn" type="button">Refresh</button>
+      </div>
+      <ul id="notes-list" class="notes-list">
+        <li class="empty-state">Loading notes...</li>
+      </ul>
+    </section>
+
+    <!-- Feedback / errors -->
+    <p id="message" class="message" role="status"></p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
